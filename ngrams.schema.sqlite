@@ -1,0 +1,6 @@
+.open "ngrams.sqlite3"
+
+CREATE TABLE IF NOT EXISTS "ngrams" (
+    "ngram" VARCHAR(255) DEFAULT "",
+    "frequency" INTEGER DEFAULT 1
+);
