@@ -1,5 +1,8 @@
 ''' Make n-grams from /usr/share/dict/words
 
+Be aware that this is not idempotent.  There is no primary key in the database.
+This can be updated to use the ngram as the primary key, but the database usage isn't specified that deeply.
+
 We can make an exhaustive list of ngrams here for this dataset.
 
 This will not tell us about ngram frequency in composed english.

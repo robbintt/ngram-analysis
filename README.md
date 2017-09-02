@@ -10,7 +10,27 @@ trigrams: (len-2)+1
 4-grams: (len-3)+1
 n-grams: (len-n)+1 where len==n, this represents the full word
 
-### Working backwards:
+
+### Purpose
+
+Looking at all ngrams in english is interesting but ultimately a dictionary is a bad source dataset. The dictionary is a very poor representation of ngram frequency in composed english.
+
+This same code can be used with any source dataset, but it will need to be munged into a `\n` separated list of words with no punctuation.  If you leave punctuation in, the word will be filtered.
+
+
+### Viewing ngram frequency sqlite3 data
+
+An interesting query: `select * from ngrams where frequency > 5000 and length(ngram) > 3 order by ngram;`
+
+
+### Dictionary Estimates Working backwards
+
+Some calculations to make sure that this isn't going to take too long.
+
+**The actual size of the sqlite3 database of ngrams and their frequencies is 34 MB.**
+
+The upper bound estimate was 65 MB plus 236 KB of ints. The dataset estimated size was 32.5 to 52 MB.
+
 
 ```
 A word of length 2 has one n-gram, itself: (2-2)+1 = 0
@@ -29,6 +49,7 @@ The max size of the ngram dictionary would be ~13 * ~5 = 65 megabytes
 The size will be lower due to duplicates, perhaps 50-80% of upper bound. 
 Also allocate an int for each ngram to measure quantity of ngrams.
 ```
+
 
 ### README from `/usr/share/dict/words`
 
