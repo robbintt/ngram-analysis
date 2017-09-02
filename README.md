@@ -18,6 +18,17 @@ Looking at all ngrams in english is interesting but ultimately a dictionary is a
 This same code can be used with any source dataset, but it will need to be munged into a `\n` separated list of words with no punctuation.  If you leave punctuation in, the word will be filtered.
 
 
+### Future Analysis
+
+Because this list of ngram frequencies has a very rich substring occurrence, a graph could be built of these relationships.
+
+This would allow words to be classified more handily by distance on a graph and quantity of shared substring routes between two words.
+
+There would be two node types, `word nodes` which have all their substrings an immediate distance away, and `substring nodes` which are descendants of both `word nodes` and their `parent substring nodes`. A `parent substring node` just has a length greater than 2.
+
+Then the shortest route between two words would be the longest common substring, and the length of the route would be the number of letters that are removed from each word until that substring occurs. There would be multiple routes between two words, one for each longest substring. Additionally there would be extended routes between another root node that we would probably not be interested in for examining common substrings but could be interesting for finding word groups, for example, the longest route between two words would (I think??) include all of the words containing the longest substring of those two words.
+
+
 ### Viewing ngram frequency sqlite3 data
 
 An interesting query: `select * from ngrams where frequency > 5000 and length(ngram) > 3 order by ngram;`
